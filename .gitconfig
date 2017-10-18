@@ -1,8 +1,8 @@
 [user]
-	email = rainbowjlinux@gmail.com
-	name = rainbowjlinux
+    email = rainbowjlinux@gmail.com
+    name = rainbowjlinux
 [alias]
-	st = status
+    st = status
     di = difftool
     ck = checkout
 [color]
