@@ -1,0 +1,13 @@
+[user]
+	email = rainbowjlinux@gmail.com
+	name = rainbowjlinux
+[alias]
+	st = status
+    di = difftool
+    ck = checkout
+[color]
+    ui = auto
+[core]
+    editor = vim
+[diff]
+    tool = vim 
