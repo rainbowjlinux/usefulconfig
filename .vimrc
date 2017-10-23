@@ -69,3 +69,7 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 :nnoremap <space> za
+
+set cursorcolumn
+set cursorline
+hi cursorcolumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
