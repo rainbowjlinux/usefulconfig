@@ -1,0 +1,116 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Bundle 'scrooloose/nerdtree'
+Bundle 'kien/rainbow_parentheses.vim'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+syntax on 
+set incsearch
+set ignorecase
+set hlsearch
+set smartcase
+
+set fileencodings=utf-8,gb2312,gbk,gb18030
+set termencoding=utf-8
+set encoding=prc
+
+set expandtab
+
+set tabstop=4
+
+set shiftwidth=4
+
+set showmatch
+
+"let mapleader=';'
+
+set autoindent
+
+set smartindent
+
+set hlsearch
+
+set ruler
+set number
+set nocompatible
+set backspace=indent,eol,start
+set backspace=2
+
+set ignorecase
+
+let NERDTreeShowHidden=0
+let NERDTreeIgnore = ['\.pyc$', '__pycache__']
+let g:NERDTreeWinSize=35
+map <leader>nn :NERDTreeToggle<cr>
+map <leader>nb :NERDTreeFromBookmark<Space>
+map <leader>nf :NERDTreeFind<cr>
+
+"""""""""""""""""
+" wjl customize
+"""""""""""""""""
+"for python header --start
+autocmd BufNewFile *.py 0r ~/.vim/vim_python_header
+autocmd BufNewFile *.py ks|call FileName()|'s
+autocmd BufNewFile *.py ks|call CreatedTime()|'s
+
+fun FileName()
+    if line("$") > 10
+        let l = 10
+    else
+        let l = line("$")
+    endif 
+    exe "1," . l . "g/File Name:.*/s/File Name:.*/File Name: " .expand("%")  
+endfun 
+
+fun CreatedTime()
+    if line("$") > 10
+        let l = 10
+    else
+        let l = line("$")
+    endif 
+    exe "1," . l . "g/Created Time:.*/s/Created Time:.*/Created Time: " .strftime("%Y-%m-%d %T") 
+endfun 
+"for python header --end
+
+"for rainbow_parentheses
+let g:rbpt_colorpairs = [
+            \ ['brown', 'RoyalBlue3'],
+            \ ['Darkblue', 'SeaGreen3'],
+            \ ['darkgray', 'DarkOrchid3'],
+            \ ['darkgreen', 'firebrick3'],
+            \ ['darkcyan', 'RoyalBlue3'],
+            \ ['darkred', 'SeaGreen3'],
+            \ ['darkred', 'DarkOrchid3'],
+            \ ['darkcyan', 'SeaGreen3'],
+            \ ['darkmagenta', 'DarkOrchid3'],
+            \ ['brown', 'firebrick3'],
+            \ ['gray', 'RoyalBlue3'],
+            \ ['black', 'SeaGreen3'],
+            \ ['darkmagenta', 'DarkOrchid3'],
+            \ ['Darkblue', 'firebrick3'],
+            \ ['darkgreen', 'RoyalBlue3'],
+            \ ['red', 'firebrick3'],
+            \ ]
+let g:rbpt_max = 16
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+" keymapping
+map j gj
+map k gk
+
+"remember the last position
+if has("autocmd")
+    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal g'\"" | endif
+endif
+
+
