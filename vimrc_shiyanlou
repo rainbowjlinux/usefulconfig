@@ -4,13 +4,16 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Bundle 'scrooloose/nerdtree'
+Bundle 'VundleVim/Vundle.vim'
 Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'majutsushi/tagbar'
+Bundle 'Raimondi/delimitMate'
+Bundle 'bronson/vim-trailing-whitespace'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-syntax on 
+syntax on
 set incsearch
 set ignorecase
 set hlsearch
@@ -44,39 +47,18 @@ set backspace=2
 
 set ignorecase
 
-let NERDTreeShowHidden=0
-let NERDTreeIgnore = ['\.pyc$', '__pycache__']
-let g:NERDTreeWinSize=35
-map <leader>nn :NERDTreeToggle<cr>
-map <leader>nb :NERDTreeFromBookmark<Space>
-map <leader>nf :NERDTreeFind<cr>
+" keymapping
+map j gj
+map k gk
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-h> <C-w>h
+map <C-l> <C-w>l
+nmap <F4> :TagbarToggle<CR>
 
 """""""""""""""""
 " wjl customize
 """""""""""""""""
-"for python header --start
-autocmd BufNewFile *.py 0r ~/.vim/vim_python_header
-autocmd BufNewFile *.py ks|call FileName()|'s
-autocmd BufNewFile *.py ks|call CreatedTime()|'s
-
-fun FileName()
-    if line("$") > 10
-        let l = 10
-    else
-        let l = line("$")
-    endif 
-    exe "1," . l . "g/File Name:.*/s/File Name:.*/File Name: " .expand("%")  
-endfun 
-
-fun CreatedTime()
-    if line("$") > 10
-        let l = 10
-    else
-        let l = line("$")
-    endif 
-    exe "1," . l . "g/Created Time:.*/s/Created Time:.*/Created Time: " .strftime("%Y-%m-%d %T") 
-endfun 
-"for python header --end
 
 "for rainbow_parentheses
 let g:rbpt_colorpairs = [
@@ -103,9 +85,11 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-" keymapping
-map j gj
-map k gk
+" tagbar
+let g:tagbar_left=1
+let g:tagbar_width=30
+let g:tagbar_ctags_bin='/usr/bin/ctags'
+autocmd BufReadPost *.py call tagbar#autoopen()
 
 "remember the last position
 if has("autocmd")
@@ -113,4 +97,13 @@ if has("autocmd")
     \| exe "normal g'\"" | endif
 endif
 
+"Quickly Run .py
+map <F5> :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+    exec "w"
+    if &filetype == 'python'
+        exec "!python3 %"
+    endif
+endfunc
 
+set mouse=a
