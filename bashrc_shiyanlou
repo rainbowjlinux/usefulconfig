@@ -88,6 +88,9 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 #alias l='ls -CF'
+alias re='scriptreplay -t time.txt'
+alias lu='script -t 2>time.txt'
+#typescript_$(date +%Y%m%d)'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -114,8 +117,10 @@ if ! shopt -oq posix; then
 fi
 
 # added by Anaconda3 4.4.0 installer
-export PATH="/home/shiyanlou/anaconda3/bin:$PATH"
+# export PATH="/home/shiyanlou/anaconda3/bin:$PATH"
 
 source ~/.local/bin/bashmarks.sh
 
 export PS1="[\[\e[31;1m\]\w\e[0m]\$ "
+export WORKON_HOME=/home/shiyanlou/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
