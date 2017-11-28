@@ -1,0 +1,5 @@
+sudo apt-get install ctags
+sudo apt-get install meld
+sudo apt-get install python3-pip
+pip3 install virtualenv virtualenvwrapper
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
